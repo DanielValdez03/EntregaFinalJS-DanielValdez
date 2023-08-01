@@ -1,34 +1,61 @@
-let consulta = confirm("Bienvenido a Accionarte, la franquicia de gimnasios más grande del país. ¿Desea adquirir una mensualidad?"); // Al abrir la página se mostrará un confirm para que el usuario elija si quiere adquirir o no los servicios //
-
-if (consulta == true) { // Si el usuario acepta (true) se iniciará el proceso de inscripción //
-  let mensualidad; // Declaramos la variable "mensualidad" la cual el usuario le asignará su valor por medio de un prompt //
-  do { // Por medio de este ciclo do... while haremos que en caso de que el usuario elija una mensualidad errónea se vuelva a repetir el proceso de inscripción //
-    alert("Elige uno de nuestros planes mensuales:\nBasico: $3,000\nCompleto: $5,000\nFamiliar: $6,000");
-    mensualidad = prompt("Elige la mensualidad que deseas adquirir"); // Estos son los valores válidos de mensualidades que el usuario debe elegir //
-    switch (mensualidad.toLowerCase()) { // Creamos un switch el cuál avisa al usuario que plan adquirió y proceda al registro del user (En caso de poner un valor válido) o avise que se ha colocado un valor inválido y dé la oportunidad de volverlo a intentar //
-      case "basico":
-        alert("Has adquirido el plan básico por $3,000");
-        createUser();
-        break;
-      case "completo":
-        alert("Has adquirido el plan completo por $5,000");
-        createUser();
-        break;
-      case "familiar":
-        alert("Has adquirido el plan familiar por $6,000");
-        createUser();
-        break;
-      default:
-        alert("Esta mensualidad no está disponible, por favor selecciona una válida");
-        break;
-    }
-  } while (mensualidad !== "basico" && mensualidad !== "completo" && mensualidad !== "familiar"); // Condiciones, las cuales si se cumplen, mantienen el ciclo en funcionamiento //
-}else { // Else en caso de que el usuario presione cancelar (false) //
-    alert("Gracias por tu visita. ¡Hasta luego!");
+// Carrito de Compras para una tienda de camisetas de fútbol //
+// Defino los Productos que voy a vender con un objeto constructor //
+class CamisetaLigaArgentina {
+  constructor(equipo, talle, precio, color) {
+    this.equipo = equipo;
+    this.talle = talle;
+    this.precio = precio; 
+    this.color = color
   }
-
-function createUser() { // Creamos esta función para crear el nombre de usuario y contraseña por medio de prompts, luego la llamaremos en nuestro switch para que se aplique en todos los casos en donde el usuario seleccione una mensualidad válida //
-  let usuario = prompt("Genial ahora creemos una cuenta para guardar tus rutinas\nIngresá un nombre de usuario");
-  let contraseña = prompt("Ingresa tu contraseña");
-  alert("¡Usuario creado exitosamente!");
 }
+
+let CamisetaBocaJuniors = new CamisetaLigaArgentina ("Boca Juniors", "Talle m", 20000, "azul")
+let CamisetaRiverPlate = new CamisetaLigaArgentina ("River Plate", "Talle s", 20000, "blanco")
+let CamisetaIndependiente = new CamisetaLigaArgentina ("Independiente", "Talle l", 19000, "rojo")
+let CamisetaRacing = new CamisetaLigaArgentina ("Racing", "Talle xs", 19000, "celeste")
+let CamisetaTalleres = new CamisetaLigaArgentina ("Talleres", "Talle xxl", 17000, "blanco")
+let CamisetaEstudiantes = new CamisetaLigaArgentina ("Estudiantes", "Talle xl", 17000, "rojo")
+
+
+// Creo un Array con cada uno de los productos //
+
+let catalogo = [CamisetaBocaJuniors, CamisetaRiverPlate, CamisetaIndependiente, CamisetaRacing, CamisetaTalleres,CamisetaEstudiantes]
+
+// Defino una Función la cual va a ser la que permita al usuario interactuar con el stock de la página //
+function filtrarProducto() {
+  // Utilizo un bucle while el cual se repetirá indefinidamente hasta que el usuario ingresé un valor valido (este bucle finaliza por medio de un break si se encuentra un valor que coincida con la bsuqueda del usuario) //
+  while (true) {
+    let busquedaUsuario = prompt("Bienvenido, Ingrese cualquier filtro para encontrar la camiseta que busca:\nEquipo\nTalle (Ingresá: Talle + el talle que estas buscando)\nPrecio\nColor").toLowerCase(); // Le pedimos al usuario que filtre alguna caracteristica del producto que busca //
+
+    let solicitudUsuario = catalogo.filter((camiseta) => //Mediante un filter el cual se le aplica al Array que creamos definimos los filtros //
+      camiseta.equipo.toLowerCase().includes(busquedaUsuario) ||
+      camiseta.talle.toLowerCase().includes(busquedaUsuario) ||
+      camiseta.precio.toString().includes(busquedaUsuario) ||
+      camiseta.color.toLowerCase().includes(busquedaUsuario)
+    );
+
+    let resultados = solicitudUsuario.map(camiseta => `Equipo: ${camiseta.equipo}, ${camiseta.talle}, Precio: ${camiseta.precio}, Color: ${camiseta.color}`).join('\n'); // Utilizamos .map para transformar las camisetas filtradas en un nuevo array de strings que contienen información relevante sobre cada camisetas, esto se mostrará en un alert si la busqueda del usuario tiene alguna coincidencia //
+
+    if (resultados.length > 0) { // Si el usuario ingresa alguna coincidencia con el stock de camisetas se parará el bucle //
+      alert("Resultados del filtro:\n" + resultados);
+      break; // Salir del bucle si se encontraron resultados //
+    } else { // Si es usuario no ingresa alguna coincidencia se mostrará este alert y se repetirá el bucle //
+      alert("No se encontraron camisetas con ese filtro. Por favor, ingrese un valor válido.");
+    }
+  }
+}
+
+filtrarProducto();
+
+
+
+
+
+
+
+
+
+
+
+
+
