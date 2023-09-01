@@ -37,7 +37,7 @@ function mostrarPokemons(data){
             <p class="stat">${data.height}MTS</p>
             <p class="stat">${data.weight}KG</p>
         </div>`;
-        listaPokemones.append(div);
+        listaPokemones.append(div);}
        
         buttons.forEach((button) => button.addEventListener("click", (event) => {
             const idButton = event.currentTarget.id
@@ -59,5 +59,5 @@ function mostrarPokemons(data){
                 })
             }
         }))
-}
+
 
