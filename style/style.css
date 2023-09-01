@@ -172,6 +172,12 @@ main{
     border-radius: 100vmax;
     padding: .25rem .5rem;
 }
+#favorite{
+background-color: var(--clr-gray);
+padding: .75rem;
+border-radius: 100vmax;
+font-weight: bold;
+}
 /* Aquí comienzan los colores de botones según tipo */
 .normal {
     background-color: var(--type-normal);
@@ -244,4 +250,8 @@ main{
 .fairy {
     background-color: var(--type-fairy);
     color: var(--clr-black);
+}
+#favoritos{
+    background-color: var(--clr-black);
+    color: var(--clr-white);
 }
