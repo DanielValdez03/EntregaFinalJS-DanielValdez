@@ -91,6 +91,7 @@ main{
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
 }
+/* Cards */
 .card-pokemon{
     border-radius: 1rem;
     background-color: var(--clr-white);
